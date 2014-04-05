@@ -39,7 +39,7 @@ import com.paranoid.paranoidota.updater.Updater.PackageInfo;
 
 public class GooServer implements Server {
 
-    private static final String URL = "http://api.crxteam.info/json2&path=/devs/paranoidandroid/roms/%s&ro_board=%s";
+    private static final String URL = "http://api.crxteam.info/updater.php?%s";
     private static final String GAPPS_RESERVED_WORDS = "-signed|-modular|-full|-mini|-micro|-stock";
 
     private Context mContext;
