@@ -40,7 +40,7 @@ import com.paranoid.paranoidota.updater.Updater.PackageInfo;
 public class GooServer implements Server {
 
     private static final String URL = "http://api.crxteam.info/updater.php?%s";
-    private static final String GAPPS_RESERVED_WORDS = "-signed|-modular|-full|-mini|-micro|-stock";
+    private static final String GAPPS_RESERVED_WORDS = "-signed|-modular|-full|-mini|-micro|-stock|-essential";
 
     private Context mContext;
     private String mDevice = null;
@@ -100,7 +100,7 @@ public class GooServer implements Server {
                 Version version = new Version(filename);
                 if (Version.compare(mVersion, version) < 0) {
                     list.add(new UpdatePackage(mDevice, filename, version, file
-                            .getLong("filesize"), "http://goo.im"
+                            .getLong("filesize"), "http://api.crxteam.info"
                             + file.getString("path"), file.getString("md5"),
                             !mIsRom));
                 }

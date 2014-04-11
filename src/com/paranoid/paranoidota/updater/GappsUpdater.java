@@ -89,6 +89,8 @@ public class GappsUpdater extends Updater {
             type = SettingsHelper.GAPPS_MICRO;
         } else if ("mini".equals(mType)) {
             type = SettingsHelper.GAPPS_MINI;
+		} else if ("essential".equals(mType)) {
+            type = SettingsHelper.GAPPS_ESSENTIAL;
         } else if ("stock".equals(mType)) {
             type = SettingsHelper.GAPPS_STOCK;
         }
@@ -119,6 +121,8 @@ public class GappsUpdater extends Updater {
                 return "gapps-micro";
             case SettingsHelper.GAPPS_MINI :
                 return "gapps-mini";
+            case SettingsHelper.GAPPS_ESSENTIAL :
+                return "gapps-essential";
             case SettingsHelper.GAPPS_STOCK:
                 return "gapps";
             case SettingsHelper.GAPPS_FULL :
