@@ -39,7 +39,7 @@ import java.util.List;
 
 public class LegacyServer implements Server {
 
-    private static final String URL = "http://api.crxteam.info/updater.php?%s";
+    private static final String URL = "http://api.crxteam.info/updater.php?option=%s";
     private static final String GAPPS_RESERVED_WORDS = "-signed|-modular|-full|-mini|-micro|-stock|-essential";
 
     private Context mContext;
