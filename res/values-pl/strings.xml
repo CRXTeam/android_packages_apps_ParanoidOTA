@@ -86,7 +86,7 @@
     <string name="sdext">SD-Ext</string>
     <string name="alert_reboot_install_title">Instalacja aktualizacji</string>
     <string name="alert_reboot_one_message">Twoje urządzenie zostanie zrestartowane aby zaintalować aktualizacje</string>
-    <string name="alert_reboot_more_message">Twoje urządzenie zostanie teraz zrestartowane
+    <string name="alert_reboot_more_message">Twoje urządzenie zostanie teraz zrestartowane</string>
     <string name="alert_reboot_now">Instaluj teraz</string>
 
     <!-- CHANGELOG -->
