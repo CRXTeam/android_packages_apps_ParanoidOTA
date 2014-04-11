@@ -134,6 +134,7 @@
     <string name="gapps_type_mini">Mini package</string>
     <string name="gapps_type_stock">Stock package</string>
     <string name="gapps_type_micro">Micro package</string>
+	<string name="gapps_type_essential">Essential package</string>
     <string name="time_notifications_never">Don\'t check</string>
     <string name="time_notifications_half_an_hour">Half an hour</string>
     <string name="time_notifications_an_hour">1 hour</string>
