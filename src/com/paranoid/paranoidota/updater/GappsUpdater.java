@@ -29,7 +29,7 @@ import com.paranoid.paranoidota.R;
 import com.paranoid.paranoidota.Utils;
 import com.paranoid.paranoidota.Version;
 import com.paranoid.paranoidota.helpers.SettingsHelper;
-import com.paranoid.paranoidota.updater.server.GooServer;
+import com.paranoid.paranoidota.updater.server.LegacyServer;
 
 public class GappsUpdater extends Updater {
 
@@ -44,7 +44,7 @@ public class GappsUpdater extends Updater {
     private String mType;
 
     public GappsUpdater(Context context, boolean fromAlarm) {
-        super(context, new Server[] { new GooServer(context, false) }, fromAlarm);
+        super(context, new Server[] { new LegacyServer(context, false) }, fromAlarm);
 
         File file = new File(PROPERTIES_FILE);
         if (file.exists()) {
