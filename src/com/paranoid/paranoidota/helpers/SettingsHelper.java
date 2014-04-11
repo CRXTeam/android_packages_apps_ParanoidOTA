@@ -47,7 +47,7 @@ public class SettingsHelper {
     private static final String DEFAULT_CHECK_TIME = "18000000"; // five hours
     private static final boolean DEFAULT_CHECK_GAPPS = true;
 
-    private static int DEFAULT_GAPPS_TYPE = GAPPS_FULL;
+    private static int DEFAULT_GAPPS_TYPE = GAPPS_ESSENTIAL;
 
     private SharedPreferences settings;
 
