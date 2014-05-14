@@ -121,13 +121,13 @@ public class GappsUpdater extends Updater {
                 return "gapps-micro";
             case SettingsHelper.GAPPS_MINI :
                 return "gapps-mini";
-            case SettingsHelper.GAPPS_ESSENTIAL :
-                return "gapps-essential";
+            case SettingsHelper.GAPPS_FULL :
+                return "gapps-full";
             case SettingsHelper.GAPPS_STOCK:
                 return "gapps";
-            case SettingsHelper.GAPPS_FULL :
+            case SettingsHelper.GAPPS_ESSENTIAL :
             default :
-                return "gapps-full";
+                return "gapps-essential";
         }
     }
 
