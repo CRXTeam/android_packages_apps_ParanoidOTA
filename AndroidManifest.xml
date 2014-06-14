@@ -20,8 +20,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.paranoid.paranoidota"
-    android:versionCode="21"
-    android:versionName="2.1" >
+    android:versionCode="20"
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="19"
