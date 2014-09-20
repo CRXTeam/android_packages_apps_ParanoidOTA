@@ -25,8 +25,6 @@ import com.paranoid.paranoidota.R;
 import com.paranoid.paranoidota.Utils;
 import com.paranoid.paranoidota.Version;
 import com.paranoid.paranoidota.updater.server.LegacyServer;
-import com.paranoid.paranoidota.updater.server.HsbServer;
-import com.paranoid.paranoidota.updater.server.PaServer;
 
 public class RomUpdater extends Updater {
 
