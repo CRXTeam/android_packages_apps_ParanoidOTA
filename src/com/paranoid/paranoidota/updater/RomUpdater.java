@@ -28,14 +28,26 @@ import com.paranoid.paranoidota.updater.server.LegacyServer;
 
 public class RomUpdater extends Updater {
 
+    public static String getVersionString(Context context) {
+        return getDevice(context) + "-" + Utils.getProp(Utils.MOD_VERSION);
+    }
+
+    private static String getDevice(Context context) {
+        String device = Utils.getProp(PROPERTY_DEVICE);
+        if (device == null || device.isEmpty()) {
+            device = Utils.getProp(PROPERTY_DEVICE_EXT);
+            device = Utils.translateDeviceName(context, device);
+        }
+        return device == null ? "" : device.toLowerCase();
+    }
+
     public RomUpdater(Context context, boolean fromAlarm) {
         super(context, new Server[] { new LegacyServer(context, true) }, fromAlarm);
     }
 
     @Override
     public Version getVersion() {
-        String version = getDevice() + "-" + Utils.getProp(Utils.MOD_VERSION);
-        return new Version(version);
+        return new Version(getVersionString(getContext()));
     }
 
     @Override
@@ -45,12 +57,7 @@ public class RomUpdater extends Updater {
 
     @Override
     public String getDevice() {
-        String device = Utils.getProp(PROPERTY_DEVICE);
-        if (device == null || device.isEmpty()) {
-            device = Utils.getProp(PROPERTY_DEVICE_EXT);
-            device = Utils.translateDeviceName(getContext(), device);
-        }
-        return device == null ? "" : device.toLowerCase();
+        return getDevice(getContext());
     }
 
     @Override
