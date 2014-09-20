@@ -52,11 +52,6 @@ import com.paranoid.paranoidota.updater.Updater.PackageInfo;
 import com.paranoid.paranoidota.updater.Updater.UpdaterListener;
 import com.paranoid.paranoidota.widget.Card;
 
-public class MainActivity extends Activity implements UpdaterListener, DownloadCallback, OnNavigationListener {
-
-    private static final String CHANGELOG = "http://www.crxteam.info";
-
-
 public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
         OnItemClickListener {
 
