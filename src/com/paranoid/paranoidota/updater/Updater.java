@@ -176,19 +176,17 @@ public abstract class Updater implements Response.Listener<JSONObject>, Response
                 for (int i = 0; i < list.size(); i++) {
                     info = list.get(i);
                     String fileName = info.getFilename();
-                    if ((gappsType == SettingsHelper.GAPPS_MINI && !fileName.contains("-mini")) 
-					    ||
+                    if ((gappsType == SettingsHelper.GAPPS_MINI && !fileName.contains("-mini"))
+                            ||
                             (gappsType == SettingsHelper.GAPPS_STOCK && !fileName
-							        .contains("-stock")) 
-					    ||
-                            (gappsType == SettingsHelper.GAPPS_FULL && !fileName
-							        .contains("-full")) 
-					    ||
-							(gappsType == SettingsHelper.GAPPS_ESSENTIAL && !fileName
-							        .contains("-essential")) 
-					    ||
+                                    .contains("-stock"))
+                            ||
+                            (gappsType == SettingsHelper.GAPPS_FULL && !fileName.contains("-full"))
+                            ||
+							(gappsType == SettingsHelper.GAPPS_ESSENTIAL && !fileName.contains("-essential"))
+                            ||
                             (gappsType == SettingsHelper.GAPPS_MICRO && !fileName
-							        .contains("-micro"))) {
+                                    .contains("-micro"))) {
                         list.remove(i);
                         i--;
                         continue;

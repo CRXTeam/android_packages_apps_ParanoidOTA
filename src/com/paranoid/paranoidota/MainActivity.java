@@ -18,21 +18,33 @@
  */
 
 package com.paranoid.paranoidota;
-import java.util.ArrayList;
-import java.util.List;
+
 import android.app.ActionBar;
-import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.paranoid.paranoidota.Utils.NotificationInfo;
@@ -52,16 +64,23 @@ import com.paranoid.paranoidota.updater.Updater.PackageInfo;
 import com.paranoid.paranoidota.updater.Updater.UpdaterListener;
 import com.paranoid.paranoidota.widget.Card;
 
-public class MainActivity extends Activity implements UpdaterListener, DownloadCallback, OnItemClickListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    private static final String CHANGELOG = "http://www.crxteam.info";
-    private static final String GOOGLEPLUS = "http://www.crxteam.info/";
+public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
+        OnItemClickListener {
 
+    private static final String CHANGELOG = "https://plus.google.com/app/basic/106020481530876935386/posts";
+    private static final String GOOGLEPLUS = "https://plus.google.com/communities/103106032137232805260";
     private static final String STATE = "STATE";
 
     public static final int STATE_UPDATES = 0;
     public static final int STATE_DOWNLOAD = 1;
     public static final int STATE_INSTALL = 2;
+
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     private RecoveryHelper mRecoveryHelper;
     private RebootHelper mRebootHelper;
@@ -78,7 +97,6 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
 
     private LinearLayout mCardsLayout;
     private TextView mTitle;
-    private MenuItem mCheckMenuItem;
 
     private Context mContext;
     private Bundle mSavedInstanceState;
@@ -109,7 +127,6 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
         final Drawable[] icons = new Drawable[] {
                 null, null, null, null, res.getDrawable(R.drawable.ic_settings)
         };
-
 
         mCardsLayout = (LinearLayout) findViewById(R.id.cards_layout);
         mTitle = (TextView) findViewById(R.id.header);
@@ -246,23 +263,35 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
         }
     }
 
-    private void checkUpdates() {
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    public void checkUpdates() {
         mRomUpdater.check();
         mGappsUpdater.check();
     }
 
     @Override
-    public boolean onNavigationItemSelected(int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
                 if (mState == STATE_UPDATES || mState == STATE_DOWNLOAD) {
-                    return true;
+                    break;
                 }
                 setState(STATE_UPDATES, true, false);
                 break;
             case 1:
                 if (mState == STATE_INSTALL) {
-                    return true;
+                    break;
                 }
                 setState(STATE_INSTALL, true, false);
                 break;
@@ -280,7 +309,7 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
                 startActivity(intent);
                 break;
         }
-        return true;
+        mDrawerLayout.closeDrawer(mDrawerList);
     }
 
     @Override
@@ -309,50 +338,24 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
 
     @Override
     public void versionFound(PackageInfo[] info, boolean isRom) {
-        boolean checking = mRomUpdater.isScanning() || mGappsUpdater.isScanning();
-        mTitle.setText(checking ? R.string.title_checking : R.string.app_name);
     }
 
     @Override
     public void startChecking(boolean isRom) {
-        mTitle.setText(R.string.title_checking);
         setProgressBarIndeterminate(true);
         setProgressBarVisibility(true);
     }
 
     @Override
     public void checkError(String cause, boolean isRom) {
-        mTitle.setText(R.string.app_name);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        mCheckMenuItem = menu.findItem(R.id.action_check);
-        mCheckMenuItem.setVisible(mState == STATE_UPDATES);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                return true;
-            case R.id.action_check:
-                checkUpdates();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void setState(int state) {
@@ -366,24 +369,6 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
     public void setState(int state, boolean animate, PackageInfo[] infos,
             Uri uri, String md5, boolean isRom, boolean fromRotation) {
         mState = state;
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        switch (state) {
-            case STATE_UPDATES :
-                actionBar.setSelectedNavigationItem(0);
-                break;
-            case STATE_INSTALL :
-                actionBar.setSelectedNavigationItem(1);
-                break;
-            case STATE_DOWNLOAD :
-                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-                actionBar.setDisplayShowTitleEnabled(true);
-                break;
-        }
-        if (mCheckMenuItem != null) {
-            mCheckMenuItem.setVisible(state == STATE_UPDATES);
-        }
         switch (state) {
             case STATE_UPDATES:
                 if (mSystemCard == null) {
@@ -427,6 +412,8 @@ public class MainActivity extends Activity implements UpdaterListener, DownloadC
                 }
                 break;
         }
+        ((ArrayAdapter<String>) mDrawerList.getAdapter()).notifyDataSetChanged();
+        updateTitle();
     }
 
     public void addCards(Card[] cards, boolean animate, boolean remove) {

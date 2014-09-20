@@ -42,7 +42,7 @@
 	         android:layout_width="match_parent"
 	         android:layout_height="wrap_content"
 	         android:text="@string/app_name"
-	         android:textColor="@android:color/holo_blue_light"
+	         android:textColor="@color/actionbar_background"
 	         android:textSize="@dimen/header_text_size" />
 	 
 	     <View
@@ -50,7 +50,7 @@
 	         android:layout_height="@dimen/header_underline_size"
 	         android:layout_marginTop="@dimen/header_underline_top_margin"
 	         android:layout_marginBottom="@dimen/header_underline_bottom_margin"
-	         android:background="@android:color/holo_blue_light" />
+	         android:background="@color/actionbar_background" />
 	 
 	     <ScrollView
 	         android:layout_width="fill_parent"
@@ -70,7 +70,7 @@
 
     <ListView
         android:id="@+id/left_drawer"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"

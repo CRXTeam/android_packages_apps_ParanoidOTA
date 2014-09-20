@@ -29,8 +29,8 @@ public class SettingsHelper {
     public static final int GAPPS_MINI = 1;
     public static final int GAPPS_STOCK = 2;
     public static final int GAPPS_MICRO = 3;
-	public static final int GAPPS_ESSENTIAL = 4;
-
+    public static final int GAPPS_ESSENTIAL = 4;
+	
     public static final String PROPERTY_CHECK_TIME = "checktime";
     public static final String PROPERTY_CHECK_GAPPS = "checkgapps";
     public static final String PROPERTY_GAPPS_TYPE = "gappstype";
