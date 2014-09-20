@@ -22,7 +22,7 @@
 
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/ActionBar</item>
-        <item name="android:checkboxStyle">@style/Checkbox</item>
+        <item name="android:checkboxStyle">@style/CheckBox</item>
     </style>
 
     <style name="ActionBar" 
