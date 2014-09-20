@@ -52,8 +52,7 @@ import com.paranoid.paranoidota.updater.Updater.PackageInfo;
 import com.paranoid.paranoidota.updater.Updater.UpdaterListener;
 import com.paranoid.paranoidota.widget.Card;
 
-public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
-        OnItemClickListener {
+public class MainActivity extends Activity implements UpdaterListener, DownloadCallback, OnItemClickListener {
 
     private static final String CHANGELOG = "http://www.crxteam.info";
     private static final String GOOGLEPLUS = "http://www.crxteam.info/";
