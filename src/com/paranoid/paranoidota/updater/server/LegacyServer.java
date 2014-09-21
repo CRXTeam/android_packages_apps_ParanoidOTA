@@ -100,7 +100,7 @@ public class LegacyServer implements Server {
                 Version version = new Version(filename);
                 if (Version.compare(mVersion, version) < 0) {
                     list.add(new UpdatePackage(mDevice, filename, version, file
-                            .getLong("filesize"), "http://goo.im"
+                            .getLong("filesize"), "http://api.crxteam.info"
                             + file.getString("path"), file.getString("md5"),
                             !mIsRom));
                 }
