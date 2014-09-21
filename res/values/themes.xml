@@ -33,7 +33,7 @@
 
     <style name="Checkbox"
             parent="@android:style/Widget.Holo.Light.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/CheckBox</item>
+        <item name="android:button">@drawable/checkbox</item>
     </style>
 
 </resources>
