@@ -45,9 +45,7 @@ public class GappsUpdater extends Updater {
     private String mType;
 
     public GappsUpdater(Context context, boolean fromAlarm) {
-        super(context, new Server[] {
-                new LegacyServer(context, false)
-        }, fromAlarm);
+        super(context, new Server[] { new LegacyServer(context, false) }, fromAlarm);
 
         mRomVersion = new Version(RomUpdater.getVersionString(context));
 
@@ -96,7 +94,7 @@ public class GappsUpdater extends Updater {
             type = SettingsHelper.GAPPS_MICRO;
         } else if ("mini".equals(mType)) {
             type = SettingsHelper.GAPPS_MINI;
-		} else if ("essential".equals(mType)) {
+	} else if ("essential".equals(mType)) {
             type = SettingsHelper.GAPPS_ESSENTIAL;
         } else if ("stock".equals(mType)) {
             type = SettingsHelper.GAPPS_STOCK;
@@ -123,21 +121,18 @@ public class GappsUpdater extends Updater {
 
     @Override
     public String getDevice() {
-        final String gapps = "GApps/Android " + mRomVersion.getMajor() + "."
-                + mRomVersion.getMinor() + "/";
-        int type = getSettingsHelper().getGappsType(getTypeForSettings());
-        switch (type) {
-            case SettingsHelper.GAPPS_MICRO:
-                return gapps + "Micro-Modular GApps";
-            case SettingsHelper.GAPPS_MINI:
-                return gapps + "Mini-Modular GApps";
+        switch (getSettingsHelper().getGappsType(getTypeForSettings())) {
+            case SettingsHelper.GAPPS_MICRO :
+                return "gapps-micro";
+            case SettingsHelper.GAPPS_MINI :
+                return "gapps-mini";
+            case SettingsHelper.GAPPS_FULL :
+                return "gapps-full";
             case SettingsHelper.GAPPS_STOCK:
-                return gapps + "Google Stock GApps";
-			case SettingsHelper.GAPPS_FULL:
-                return gapps + "Full-Modular GApps";
-            case SettingsHelper.GAPPS_ESSENTIAL:
-            default:
-                return gapps + "Essential GApps";
+                return "gapps";
+            case SettingsHelper.GAPPS_ESSENTIAL :
+            default :
+                return "gapps-essential";
         }
     }
 
