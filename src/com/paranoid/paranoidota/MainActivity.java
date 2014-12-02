@@ -70,7 +70,7 @@ import java.util.List;
 public class MainActivity extends Activity implements UpdaterListener, DownloadCallback,
         OnItemClickListener {
 
-    private static final String CHANGELOG = "https://raw.githubusercontent.com/CRXTeam/android_vendor_cpa/kitkat/CHANGELOG.mkdn";
+    private static final String CHANGELOG = "https://raw.githubusercontent.com/CRXTeam/android_vendor_cpa/kitkat/CHANGELOG_lollipop.mkdn";
     private static final String GOOGLEPLUS = "http://www.crxteam.info";
     private static final String STATE = "STATE";
 
